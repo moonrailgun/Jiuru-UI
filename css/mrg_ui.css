@@ -1,0 +1,13 @@
+.mrg-btn-link {
+	padding-top: 6px;
+	padding-bottom: 6px;
+	color: #007aff;
+	border: 0;
+	background-color: transparent;
+}
+
+.aui-btn-block {
+	margin-left: auto;
+	margin-right: auto;
+	width: 95%;
+}
