@@ -11,3 +11,49 @@
 	margin-right: auto;
 	width: 95%;
 }
+
+.mrg-logo {
+	width: 100px;
+	height: 100px;
+	margin: 60px auto 25px auto;
+	background-image: url(../image/user-photo.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	border-radius: 60px;
+}
+
+.mrg-login-form {
+	border: solid 1px #ddd;
+	border-radius: 5px;
+	width: 95%;
+	margin: auto;
+	overflow: hidden;
+	background-color: #ddd;
+}
+
+.mrg-login-form input:first-child {
+	margin-bottom: 1px;
+}
+
+.mrg-login-form input {
+	border: none;
+	margin: 0px;
+	font-size: 18px;
+	padding: 15px !important;
+	border-radius: 0px;
+	height: auto;
+}
+
+.logo-checkbox-container {
+	height: 22px;
+	display: block;
+	width: 95%;
+	margin: 10px auto;
+}
+.logo-checkbox-container .logo-checkbox-remeber{
+	height:22px;
+	line-height:22px;
+	display:inline;
+	vertical-align:text-bottom;
+}
