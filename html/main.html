@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>main</title>
+		<link rel="stylesheet" type="text/css" href="../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mrg_ui.css" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css" />
+	</head>
+	<body>
+		<!-- 这里是框架 -->
+		<div id="wrap">
+			<header>
+				<div id="home" class="topbar  activebar">
+					首页
+				</div>
+				<div id="message" class="topbar  ">
+					消息
+				</div>
+				<div id="account" class="topbar ">
+					账号
+				</div>
+				<div id="more" class="topbar ">
+					更多
+				</div>
+			</header>
+			<div id="main"></div>
+			<div id="footer">
+				<ul>
+					<li tapmode="active" class="active" onclick="randomSwitchBtn(this,'home',0)">
+						<a class="bottom_btn home">首页</a>
+					</li>
+					<li tapmode="active" onclick="randomSwitchBtn(this,'message',1)">
+						<a class="bottom_btn message ">消息</a>
+					</li>
+					<li tapmode="active" onclick="randomSwitchBtn(this,'account',2)">
+						<a class="bottom_btn account ">账号</a>
+					</li>
+					<li tapmode="active" onclick="randomSwitchBtn(this,'more',3)">
+						<a class="bottom_btn more ">更多</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="script/api.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+			var $header = $api.dom('header');
+			$api.fixIos7Bar($header);
+			var $body = $api.dom('body');
+			var $footer = $api.byId('footer');
+			var header_h = $api.offset($header).h;
+			var body_h = $api.offset($body).h;
+			var body_w = $api.offset($body).w;
+			var footer_h = $api.offset($footer).h;
+			var rect_h = body_h - header_h - footer_h;
+			api.openFrameGroup({
+				name : 'group',
+				scrollEnabled : false,
+				preload : 0,
+				rect : {
+					x : 0,
+					y : header_h,
+					w : body_w,
+					h : rect_h
+				},
+				index : 0,
+				frames : [{
+					name : 'home',
+					url : 'html/home.html'
+				}, {
+					name : 'message',
+					url : 'html/message.html'
+				}, {
+					name : 'account',
+					url : 'html/account.html'
+				}, {
+					name : 'more',
+					url : 'html/more.html'
+				}]
+			}, function(ret, err) {
+				//回调
+			});
+		}
+		// 随意切换按钮
+		function randomSwitchBtn(obj, name, index) {
+			var $header = $api.dom('header');
+			var $titleBar = $api.domAll($header, '.topbar');
+			for (var i = 0; i < $titleBar.length; i++) {
+				$api.removeCls($titleBar[i], 'activebar');
+			}
+			$api.addCls($api.byId(name), 'activebar');
+			var $footer = $api.byId('footer');
+			var $footerBar = $api.domAll($footer, 'li');
+			for (var j = 0; j < $footerBar.length; j++) {
+				$api.removeCls($footerBar[j], 'active');
+			}
+			$api.addCls(obj, 'active');
+			api.setFrameGroupIndex({
+				name : 'group',
+				index : index
+			});
+		}
+	</script>
+</html>

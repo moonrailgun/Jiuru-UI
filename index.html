@@ -24,11 +24,11 @@
 			<button class="aui-btn-block aui-btn-primary" onclick="OnLogin()">
 				登陆
 			</button>
-			<button class="aui-btn-block aui-btn-negative">
+			<button class="aui-btn-block aui-btn-negative" onclick="OnRegister()">
 				注册
 			</button>
 			<button class="aui-btn mrg-btn-link aui-pull-right">
-				无法登陆？
+				忘记密码？
 			</button>
 		</div>
 	</body>
@@ -37,14 +37,18 @@
 		apiready = function() {
 			var $wrap = $api.dom('#wrap');
 			$api.fixIos7Bar($wrap);
-			
-			
 		};
 		function OnLogin() {
-			/*api.openWin({
-	            name: 'animation',
-	            url: './html/animation.html'
-            });*/
+			api.alert({
+				msg:"点击了登陆"
+            });
+		}
+		
+		function OnRegister()
+		{
+			api.alert({
+				msg:"点击了注册"
+            });
 		}
 	</script>
 </html>
