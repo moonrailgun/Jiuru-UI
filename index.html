@@ -17,9 +17,11 @@
 			</form>
 			<div class="logo-checkbox-container">
 				<input class="aui-checkbox" type="checkbox" checked>
-				<div class="logo-checkbox-remeber">记住我的状态 </div>
+				<div class="logo-checkbox-remeber">
+					记住我的状态
+				</div>
 			</div>
-			<button class="aui-btn-block aui-btn-primary">
+			<button class="aui-btn-block aui-btn-primary" onclick="OnLogin()">
 				登陆
 			</button>
 			<button class="aui-btn-block aui-btn-negative">
@@ -35,6 +37,14 @@
 		apiready = function() {
 			var $wrap = $api.dom('#wrap');
 			$api.fixIos7Bar($wrap);
+			
+			
 		};
+		function OnLogin() {
+			/*api.openWin({
+	            name: 'animation',
+	            url: './html/animation.html'
+            });*/
+		}
 	</script>
 </html>

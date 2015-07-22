@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>Animation</title>
+		<link rel="stylesheet" type="text/css" href="../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mrg_ui.css" />
+	</head>
+	<body>
+		<div id="wrap">
+			<div  style="width:200px;height:200px;margin:10px auto;">
+				<canvas width='200' height='200' id="canvasBox"></canvas>
+			</div>
+			<script>
+				function Mosaics(obj) {
+					var o = this;
+					o.box = document.getElementById(obj.id);
+					o.canvas = o.box.getContext("2d");
+					o.canvasWidth = o.box.width;
+					o.canvasHeight = o.box.height;
+					o.text = obj.text || '水';
+					//显示的文字
+					o.fontStyle = obj.fontStyle || 'bolder 100px Arial';
+					//显示文字的样式
+					o.top = obj.top || 20;
+					o.left = obj.left || 20;
+					o.frame = obj.frame || 60;
+					//动画的总帧数
+					o.FPS = obj.FPS || 30;
+					//FPS ，每秒显示的帧数
+					o.ps = [];
+					//保存文字的像素坐标信息
+					o.scraps = [];
+					o.imageData
+				}
+
+
+				Mosaics.prototype = {
+					init : function() {
+						var o = this;
+						o.canvas.fillStyle = "rgba(255,255,255,1)";
+						//设置背景颜色
+						o.canvas.fillRect(0, 0, o.canvasWidth, o.canvasHeight);
+						o.canvas.fillStyle = "rgba(0,0,0,1)";
+						//用于提取像素数据的字体颜色
+						o.canvas.font = o.fontStyle;
+						o.canvas.textBaseline = 'top';
+						o.canvas.fillText(o.text, o.top, o.left);
+						for ( y = 1; y < o.canvasHeight; y += 4) {//以4X4为一个单位点查询
+							for ( x = 1; x < o.canvasWidth; x += 4) {
+								o.imageData = o.canvas.getImageData(x, y, 1, 1);
+								/* getImageData() 方法返回 ImageData 对象，该对象拷贝了画布指定矩形的像素数据
+								 对于 ImageData 对象中的每个像素，都存在着四方面的信息，即 RGBA 值：
+								 R - 红色 (0-255)
+								 G - 绿色 (0-255)
+								 B - 蓝色 (0-255)
+								 A - alpha 通道 (0-255; 0 是透明的，255 是完全可见的)
+								 color/alpha 以数组形式存在，并存储于 ImageData 对象的 data 属性中。
+								 red=imgData.data[0];
+								 green=imgData.data[1];
+								 blue=imgData.data[2];
+								 alpha=imgData.data[3];
+								 */
+								if (o.imageData.data[0] == 0) {//对比像素数据的R值是否与提取像素数据的字体颜色一致，一致的把像素坐标加入数组中
+									o.ps.push({
+										px : x,
+										py : y
+									});
+								}
+							}
+						}
+						o.canvas.clearRect(0, 0, o.canvasWidth, o.canvasHeight);
+						for (i in o.ps) {//随机设置每个像素点的起始数据。
+							var scrap = {
+								x : o.ps[i].px,
+								y : o.ps[i].py,
+								r : 3,
+								vx : 1 + o.rand(-4, 4) / 100,
+								vy : 1 + o.rand(-4, 4) / 100,
+								mx : 1 - o.rand(1, 9) / 10,
+								my : 1 - o.rand(1, 9) / 10,
+								num : o.frame - o.rand(0, 45)
+							};
+							o.scraps.push(scrap);
+						}
+						o.timer = setInterval(function() {
+							o.update();
+							if (o.frame < 0) {
+								clearInterval(o.timer);
+							}
+						}, 1000 / o.FPS);
+					},
+					rand : function(l, u) {//随机取整
+						return Math.floor((Math.random() * (u - l + 1)) + l);
+					},
+					update : function() {
+						var o = this;
+						o.canvas.clearRect(0, 0, o.canvasWidth, o.canvasHeight);
+						o.canvas.fillStyle = "#308ede";
+						//设置动画的颜色
+						for (i in o.scraps) {
+							if (i != 0) {//每帧的动画数据
+								if (o.scraps[i].num < 15 && o.scraps[i].num > 0) {
+									o.canvas.save();
+									o.canvas.transform(o.scraps[i].num, 0, 0, o.scraps[i].num, -o.scraps[i].x * (o.scraps[i].num - 1) * o.scraps[i].vx, -o.scraps[i].y * (o.scraps[i].num - 1) * o.scraps[i].vx);
+									o.canvas.globalAlpha = 1 - (o.scraps[i].num - 1) / 15;
+									o.canvas.fillRect(o.scraps[i].x, o.scraps[i].y, o.scraps[i].r * o.scraps[i].mx, o.scraps[i].r * o.scraps[i].my);
+									o.canvas.restore();
+									o.scraps[i].num--;
+								} else if (o.scraps[i].num < 1) {
+									o.canvas.fillRect(o.scraps[i].x, o.scraps[i].y, o.scraps[i].r, o.scraps[i].r);
+								} else {
+									o.scraps[i].num--;
+								}
+							}
+						}
+						o.frame--;
+					}
+				}
+				var theMosaics = new Mosaics({
+					id : 'canvasBox',
+					fontStyle : 'bolder 150px Arial'
+				});
+				theMosaics.init();
+			</script>
+		</div>
+	</body>
+</html>
