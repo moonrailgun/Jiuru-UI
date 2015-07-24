@@ -32,17 +32,17 @@
 	background-color: #ddd;
 }
 
-.mrg-login-form input:first-child {
-	margin-bottom: 1px;
-}
-
 .mrg-login-form input {
 	border: none;
-	margin: 0px;
+	margin: 0 0 1px 0;
 	font-size: 18px;
 	padding: 15px !important;
 	border-radius: 0px;
 	height: auto;
+}
+
+.mrg-login-form input:last-child {
+	margin-bottom: 0;
 }
 
 .logo-checkbox-container {

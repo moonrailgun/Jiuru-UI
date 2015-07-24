@@ -9,7 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="./css/mrg_ui.css" />
 	</head>
 	<body>
-		<div id="wrap">
+		<div id="login-wrap">
 			<div class="mrg-logo"></div>
 			<form class="mrg-login-form">
 				<input id="account" type="text" class="aui-input-clear aui-input" placeholder="账号">
@@ -35,7 +35,7 @@
 	<script type="text/javascript" src="./script/api.js"></script>
 	<script type="text/javascript">
 		apiready = function() {
-			var $wrap = $api.dom('#wrap');
+			var $wrap = $api.dom('#login-wrap');
 			$api.fixIos7Bar($wrap);
 		};
 		function OnLogin() {
@@ -51,8 +51,9 @@
 		
 		function OnRegister()
 		{
-			api.alert({
-				msg:"点击了注册"
+			api.openWin({
+	            name: 'register',
+	            url: './html/register.html'
             });
 		}
 	</script>
