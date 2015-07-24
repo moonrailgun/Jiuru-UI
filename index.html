@@ -40,7 +40,12 @@
 		};
 		function OnLogin() {
 			api.alert({
-				msg:"点击了登陆"
+				msg:"点击了登陆,测试版本直接进入"
+            });
+            
+            api.openWin({
+	            name: 'main',
+	            url: './html/main.html'
             });
 		}
 		

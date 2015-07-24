@@ -33,19 +33,19 @@
 						<a class="bottom_btn home">首页</a>
 					</li>
 					<li tapmode="active" onclick="randomSwitchBtn(this,'message',1)">
-						<a class="bottom_btn message ">消息</a>
+						<a class="bottom_btn message">消息</a>
 					</li>
 					<li tapmode="active" onclick="randomSwitchBtn(this,'account',2)">
-						<a class="bottom_btn account ">账号</a>
+						<a class="bottom_btn account">账号</a>
 					</li>
 					<li tapmode="active" onclick="randomSwitchBtn(this,'more',3)">
-						<a class="bottom_btn more ">更多</a>
+						<a class="bottom_btn more">更多</a>
 					</li>
 				</ul>
 			</div>
 		</div>
 	</body>
-	<script type="text/javascript" src="script/api.js"></script>
+	<script type="text/javascript" src="../script/api.js"></script>
 	<script type="text/javascript">
 		apiready = function() {
 			var $header = $api.dom('header');
@@ -70,16 +70,16 @@
 				index : 0,
 				frames : [{
 					name : 'home',
-					url : 'html/home.html'
+					url : 'home.html'
 				}, {
 					name : 'message',
-					url : 'html/message.html'
+					url : 'message.html'
 				}, {
 					name : 'account',
-					url : 'html/account.html'
+					url : 'account.html'
 				}, {
 					name : 'more',
-					url : 'html/more.html'
+					url : 'more.html'
 				}]
 			}, function(ret, err) {
 				//回调
