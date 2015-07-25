@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>WaterMonitoring</title>
+		<link rel="stylesheet" type="text/css" href="../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mrg_ui.css" />
+	</head>
+	<body>
+		<header class="aui-bar aui-bar-nav aui-bar-info">
+			<a class="aui-btn aui-btn-info aui-pull-left" onclick="back()"> <span class="aui-iconfont aui-icon-left"></span> </a>
+			<div class="aui-title">
+				水质监测
+			</div>
+		</header>
+		<script type="text/javascript" src="../script/api.js"></script>
+		<script type="text/javascript">
+			function back(){
+				api.closeWin({
+                });
+			}
+			
+			apiready = function() {
+				var obj = api.require('UICustomPicker');
+				
+				
+				
+				
+				obj.open({
+					rect : {
+						x : 0,
+						y : 64,
+						w : 320,
+						h : 250
+					},
+					styles : {
+						bg : 'rgba(0,0,0,0)',
+						normalColor : '#959595',
+						selectedColor : '#3685dd',
+						selectedSize : 36,
+						tagColor : '#3685dd',
+						tagSize : 10
+					},
+					data : [{
+						tag : '时',
+						scope : '0-23'
+					}, {
+						tag : '分',
+						scope : '0-59'
+					}],
+					rows : 3,
+					fixed : true
+				}, function(ret, err) {
+					if (ret) {
+						alert(JSON.stringify(ret));
+					}
+				});
+			}
+		</script>
+	</body>
+</html>

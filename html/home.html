@@ -11,7 +11,7 @@
 	<body>
 		<div id="wrap">
 			<div class="aui-content">
-			<!-- 图片轮播 -->
+				<!-- 图片轮播 -->
 				<div id="slider" class="mrg-slider">
 					<div class="mrg-slider-group mrg-slider-loop">
 						<div class="mrg-slider-item">
@@ -39,9 +39,6 @@
 						<div class="mrg-indicator"></div>
 					</div>
 				</div>
-				<script type="text/javascript">
-					
-				</script>
 				<!-- 九宫格 -->
 				<ul class="aui-grid-nine">
 					<li class="aui-col-xs-4 aui-text-center">
@@ -62,7 +59,7 @@
 							节水EMC
 						</p>
 					</li>
-					<li class="aui-col-xs-4 aui-text-center">
+					<li class="aui-col-xs-4 aui-text-center" onclick="OpenTools4()">
 						<img src="../image/tools_04.png"/>
 						<p>
 							水质监测
@@ -101,5 +98,14 @@
 				</ul>
 			</div>
 		</div>
+		<script type="text/javascript" src="../script/api.js"></script>
+		<script type="text/javascript">
+			function OpenTools4() {
+				api.openWin({
+					name : 'WaterMonitoring',
+					url : 'waterMonitoring.html'
+				});
+			}
+		</script>
 	</body>
 </html>
