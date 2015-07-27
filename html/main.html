@@ -13,16 +13,16 @@
 		<!-- 这里是框架 -->
 		<div id="wrap">
 			<header>
-				<div id="home" class="topbar  activebar">
+				<div id="home" class="topbar activebar">
 					首页
 				</div>
-				<div id="message" class="topbar  ">
+				<div id="message" class="topbar">
 					消息
 				</div>
-				<div id="account" class="topbar ">
+				<div id="account" class="topbar">
 					账号
 				</div>
-				<div id="more" class="topbar ">
+				<div id="more" class="topbar">
 					更多
 				</div>
 			</header>
@@ -103,6 +103,13 @@
 				name : 'group',
 				index : index
 			});
+		}
+		
+		//回到我的空间
+		function switchToMyHome()
+		{
+			var el = $api.domAll("#footer ul li");
+			randomSwitchBtn(el[2], 'account',2);
 		}
 	</script>
 </html>

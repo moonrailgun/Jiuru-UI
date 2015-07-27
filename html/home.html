@@ -41,7 +41,7 @@
 				</div>
 				<!-- 九宫格 -->
 				<ul class="aui-grid-nine">
-					<li class="aui-col-xs-4 aui-text-center">
+					<li class="aui-col-xs-4 aui-text-center" onclick="OpenTools1()">
 						<img src="../image/tools_01.png"/>
 						<p>
 							我的空间
@@ -104,6 +104,13 @@
 				api.openWin({
 					name : 'WaterMonitoring',
 					url : 'waterMonitoring.html'
+				});
+			}
+
+			function OpenTools1() {
+				api.execScript({
+					name : '',
+					script : 'switchToMyHome();'
 				});
 			}
 		</script>
