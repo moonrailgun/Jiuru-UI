@@ -12,8 +12,58 @@
 		<div class="aui-content">
 			<div class="aui-card" style="margin-top:10px;">
 				<ul class="aui-list-view">
-					<li class="aui-list-view-cell mrg-list-view-cell-active">
-						<a class="aui-arrow-right">列表栏目一</a>
+					<li class="aui-list-view-cell">
+						<a class="aui-arrow-right">消息</a>
+						<div class="mrg-collapse-content">
+							<p>
+								消息消息~~~~~~~~~~~~~
+							</p>
+							<p>
+								消息消息~~~~~~~~~~~~~
+							</p>
+							<p>
+								消息消息~~~~~~~~~~~~~
+							</p>
+							<p>
+								消息消息~~~~~~~~~~~~~
+							</p>
+							<p>
+								消息消息~~~~~~~~~~~~~
+							</p>
+							<p>
+								消息消息~~~~~~~~~~~~~
+							</p>
+						</div>
+					</li>
+					<li class="aui-list-view-cell">
+						<a class="aui-arrow-right">消息</a>
+						<div class="mrg-collapse-content">
+							<p>
+								消息消息~~~~~~~~~~~~~
+							</p>
+							<p>
+								消息消息~~~~~~~~~~~~~
+							</p>
+							<p>
+								消息消息~~~~~~~~~~~~~
+							</p>
+							
+							<p>
+								消息消息~~~~~~~~~~~~~
+							</p>
+							<p>
+								消息消息~~~~~~~~~~~~~
+							</p>
+							<p>
+								消息消息~~~~~~~~~~~~~
+							</p><p>
+								消息消息~~~~~~~~~~~~~
+							</p>
+							
+						</div>
+					</li>
+					<li class="aui-list-view-cell">
+						<a class="aui-arrow-right">消息</a>
 						<div class="mrg-collapse-content">
 							<p>
 								消息消息~~~~~~~~~~~~~
@@ -21,7 +71,7 @@
 						</div>
 					</li>
 					<li class="aui-list-view-cell">
-						<a class="aui-arrow-right">列表栏目一</a>
+						<a class="aui-arrow-right">消息</a>
 						<div class="mrg-collapse-content">
 							<p>
 								消息消息~~~~~~~~~~~~~
@@ -29,7 +79,7 @@
 						</div>
 					</li>
 					<li class="aui-list-view-cell">
-						<a class="aui-arrow-right">列表栏目一</a>
+						<a class="aui-arrow-right">消息</a>
 						<div class="mrg-collapse-content">
 							<p>
 								消息消息~~~~~~~~~~~~~
@@ -37,7 +87,7 @@
 						</div>
 					</li>
 					<li class="aui-list-view-cell">
-						<a class="aui-arrow-right">列表栏目一</a>
+						<a class="aui-arrow-right">消息</a>
 						<div class="mrg-collapse-content">
 							<p>
 								消息消息~~~~~~~~~~~~~
@@ -45,23 +95,7 @@
 						</div>
 					</li>
 					<li class="aui-list-view-cell">
-						<a class="aui-arrow-right">列表栏目一</a>
-						<div class="mrg-collapse-content">
-							<p>
-								消息消息~~~~~~~~~~~~~
-							</p>
-						</div>
-					</li>
-					<li class="aui-list-view-cell">
-						<a class="aui-arrow-right">列表栏目一</a>
-						<div class="mrg-collapse-content">
-							<p>
-								消息消息~~~~~~~~~~~~~
-							</p>
-						</div>
-					</li>
-					<li class="aui-list-view-cell">
-						<a class="aui-arrow-right">列表栏目一</a>
+						<a class="aui-arrow-right">消息</a>
 						<div class="mrg-collapse-content">
 							<p>
 								消息消息~~~~~~~~~~~~~
@@ -76,6 +110,35 @@
 	<script type="text/javascript">
 		apiready = function() {
 		};
+		window.onload = function() {
+			var allCell = document.getElementsByClassName("aui-list-view-cell");
+			for (var i = 0; i < allCell.length; i++) {
+				var attr = document.createAttribute("onclick");
+				attr.nodeValue = "toggleState(this)";
+				allCell[i].attributes.setNamedItem(attr);
+			}
+		}
+		function toggleState(dom) {
+			if (!hasClass(dom, "mrg-list-view-cell-active")) {
+				clearActive();
+				dom.className = "aui-list-view-cell mrg-list-view-cell-active";
+			} else {
+				dom.className = "aui-list-view-cell";
+			}
+		}
+
+		function hasClass(dom, className) {
+			className = className.replace(/^\s|\s$/g, "")
+			return (" " + ((dom || {}).className || "").replace(/\s/g, " ") + " "
+			).indexOf(" " + className + " ") >= 0
+		}
+		
+		function clearActive()
+		{
+			var allCell = document.getElementsByClassName("aui-list-view-cell mrg-list-view-cell-active");
+			for (var i = 0; i < allCell.length; i++) {
+				allCell[i].className = "aui-list-view-cell";
+			}
+		}
 	</script>
 </html>
-
