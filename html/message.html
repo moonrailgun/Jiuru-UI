@@ -14,6 +14,7 @@
 				<ul class="aui-list-view">
 					<li class="aui-list-view-cell">
 						<a class="aui-arrow-right">消息</a>
+						<span class="aui-badge aui-badge-danger">new</span>
 						<div class="mrg-collapse-content">
 							<p>
 								消息消息~~~~~~~~~~~~~
@@ -47,7 +48,6 @@
 							<p>
 								消息消息~~~~~~~~~~~~~
 							</p>
-							
 							<p>
 								消息消息~~~~~~~~~~~~~
 							</p>
@@ -56,10 +56,10 @@
 							</p>
 							<p>
 								消息消息~~~~~~~~~~~~~
-							</p><p>
+							</p>
+							<p>
 								消息消息~~~~~~~~~~~~~
 							</p>
-							
 						</div>
 					</li>
 					<li class="aui-list-view-cell">
@@ -118,7 +118,11 @@
 				allCell[i].attributes.setNamedItem(attr);
 			}
 		}
+		/*
+		 * 点击事件
+		 */
 		function toggleState(dom) {
+			clearNewFlag(dom);
 			if (!hasClass(dom, "mrg-list-view-cell-active")) {
 				clearActive();
 				dom.className = "aui-list-view-cell mrg-list-view-cell-active";
@@ -132,13 +136,26 @@
 			return (" " + ((dom || {}).className || "").replace(/\s/g, " ") + " "
 			).indexOf(" " + className + " ") >= 0
 		}
-		
-		function clearActive()
-		{
+
+		function clearActive() {
 			var allCell = document.getElementsByClassName("aui-list-view-cell mrg-list-view-cell-active");
 			for (var i = 0; i < allCell.length; i++) {
 				allCell[i].className = "aui-list-view-cell";
 			}
+		}
+
+		function clearNewFlag(dom) {
+		//alert(a);
+			var childList = dom.childNodes;
+			for (var i = 0; i < childList.length; i++) {
+				if(childList[i].tagName == "SPAN")
+				{
+					dom.removeChild(childList[i]);
+					return;
+				}
+			}
+			/*
+			dom.removeChild()*/
 		}
 	</script>
 </html>

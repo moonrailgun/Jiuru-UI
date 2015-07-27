@@ -142,6 +142,10 @@
 	content:'\e654';
 }
 
+.aui-list-view .aui-list-view-cell span.aui-badge{
+	margin-right:20px;
+}
+
 .aui-list-view .aui-list-view-cell .mrg-collapse-content {
 	position: relative;
 	display: none;
