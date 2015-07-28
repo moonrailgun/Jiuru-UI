@@ -139,11 +139,11 @@
 }
 
 .aui-list-view-cell.mrg-list-view-cell-active .aui-arrow-right:after {
-	content:'\e654';
+	content: '\e654';
 }
 
-.aui-list-view .aui-list-view-cell span.aui-badge{
-	margin-right:20px;
+.aui-list-view .aui-list-view-cell span.aui-badge {
+	margin-right: 20px;
 }
 
 .aui-list-view .aui-list-view-cell .mrg-collapse-content {
@@ -159,6 +159,93 @@
 	background: #fff;
 }
 
-.aui-list-view .aui-list-view-cell.mrg-list-view-cell-active .mrg-collapse-content{
+.aui-list-view .aui-list-view-cell.mrg-list-view-cell-active .mrg-collapse-content {
 	display: block;
+}
+
+/*
+ * 分段选择
+ */
+.mrg-segmented-control {
+	font-size: 15px;
+	font-weight: 400;
+	position: relative;
+	display: table;
+	overflow: hidden;
+	width: 100%;
+	table-layout: fixed;
+	border: 1px solid #007aff;
+	border-radius: 3px;
+	background-color: transparent;
+	-webkit-touch-callout: none;
+}
+.mrg-segmented-control .mrg-control-item {
+	line-height: 38px;
+	display: table-cell;
+	overflow: hidden;
+	width: 1%;
+	-webkit-transition: background-color .1s linear;
+	transition: background-color .1s linear;
+	text-align: center;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color: #007aff;
+	border-color: #007aff;
+	border-left: 1px solid #007aff;
+}
+.mrg-segmented-control .mrg-control-item:first-child {
+	border-left-width: 0;
+}
+.mrg-segmented-control .mrg-control-item.mrg-active {
+	color: #fff;
+	background-color: #007aff;
+}
+.mrg-control-content {
+	position: relative;
+	display: none;
+}
+.mrg-control-content.mrg-active {
+	display: block;
+}
+
+/*
+ * popover
+ */
+.mrg-popover {
+	position: absolute;
+	z-index: 999;/*top*/
+	display: none;
+	width: 280px;
+	-webkit-transition: opacity .3s;
+	transition: opacity .3s;
+	-webkit-transition-property: opacity;
+	transition-property: opacity;
+	-webkit-transform: none;
+	transform: none;
+	opacity: 0;
+	border-radius: 7px;
+	background-color: #f7f7f7;
+	-webkit-box-shadow: 0 0 15px rgba(0, 0, 0, .1);
+	box-shadow: 0 0 15px rgba(0, 0, 0, .1);
+}
+.mrg-popover.mrg-active
+{
+    display: block;
+    opacity: 1;
+}
+
+.mrg-popover-overview{
+	top:0;
+	left:0;
+	height:100%;
+	width:100%;
+	z-index:100;
+	position: absolute;
+	background:#000;
+	display:none;
+	opacity:.7;
+}
+
+.mrg-popover-overview.mrg-active{
+	display:block;
 }

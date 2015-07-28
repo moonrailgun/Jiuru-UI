@@ -7,6 +7,11 @@
 		<title>WaterMonitoring</title>
 		<link rel="stylesheet" type="text/css" href="../css/aui.css" />
 		<link rel="stylesheet" type="text/css" href="../css/mrg_ui.css" />
+		<style>
+			#item1 ul.aui-list-view span {
+				font-size: 18px;
+			}
+		</style>
 	</head>
 	<body>
 		<header class="aui-bar aui-bar-nav aui-bar-info">
@@ -15,44 +20,183 @@
 				水质监测
 			</div>
 		</header>
+		<div class="aui-content aui-content-padded">
+			<div id="segmentedControl" class="mrg-segmented-control">
+				<a class="mrg-control-item mrg-active" href="#item1" onclick="toggleTab(this)">托管工程</a>
+				<a class="mrg-control-item" href="#item2" onclick="toggleTab(this)"> EMC工程 </a>
+			</div>
+			<div style="margin-top:10px;">
+				<div id="item1" class="mrg-control-content mrg-active">
+					<div>
+						<ul class="aui-list-view" style="overflow:visible;">
+							<span>代理商：</span>
+							<li class="aui-list-view-cell">
+								<a class="aui-arrow-right" onclick="showPop(0)">请选择</a>
+							</li>
+							<div class="mrg-popover">
+								<ul class="aui-list-view">
+									<li class="aui-list-view-cell">
+										a
+									</li>
+									<li class="aui-list-view-cell">
+										a
+									</li>
+									<li class="aui-list-view-cell">
+										a
+									</li>
+									<li class="aui-list-view-cell">
+										a
+									</li>
+									<li class="aui-list-view-cell">
+										a
+									</li>
+									<li class="aui-list-view-cell">
+										a
+									</li>
+								</ul>
+							</div>
+							<span>客户：</span>
+							<li class="aui-list-view-cell">
+								<a class="aui-arrow-right" onclick="showPop(1)">请选择</a>
+							</li>
+							<div class="mrg-popover">
+								<ul class="aui-list-view">
+									<li class="aui-list-view-cell">
+										a2
+									</li>
+									<li class="aui-list-view-cell">
+										a3
+									</li>
+									<li class="aui-list-view-cell">
+										a4
+									</li>
+									<li class="aui-list-view-cell">
+										a5
+									</li>
+									<li class="aui-list-view-cell">
+										a6
+									</li>
+									<li class="aui-list-view-cell">
+										a7
+									</li>
+								</ul>
+							</div>
+							<span>工程名称：</span>
+							<li class="aui-list-view-cell">
+								<a class="aui-arrow-right" onclick="showPop(2)">请选择</a>
+							</li>
+							<div class="mrg-popover">
+								<ul class="aui-list-view">
+									<li class="aui-list-view-cell">
+										a234
+									</li>
+									<li class="aui-list-view-cell">
+										a342
+									</li>
+									<li class="aui-list-view-cell">
+										a45
+									</li>
+									<li class="aui-list-view-cell">
+										a54
+									</li>
+									<li class="aui-list-view-cell">
+										a63
+									</li>
+									<li class="aui-list-view-cell">
+										a72
+									</li>
+								</ul>
+							</div>
+						</ul>
+					</div>
+					<div style="display:block;height:10px;"></div>
+					<button class="aui-btn-block aui-btn-warning">
+						实时监测
+					</button>
+					<button class="aui-btn-block aui-btn-danger">
+						报警查看
+					</button>
+					<button class="aui-btn-block aui-btn-info">
+						历史曲线分析
+					</button>
+				</div>
+				<div id="item2" class="mrg-control-content"></div>
+				<div id="overview" class="mrg-popover-overview"></div>
+			</div>
+		</div>
 		<script type="text/javascript" src="../script/api.js"></script>
 		<script type="text/javascript">
-			function back(){
+			function back() {
 				api.closeWin({
-                });
+				});
+			}
+
+			function toggleTab(dom) {
+				if (!hasClass(dom, "mrg-active")) {
+					clearActive();
+					dom.className = "mrg-control-item mrg-active";
+				} else {
+					dom.className = "mrg-control-item";
+				}
+			}
+
+			function clearActive() {
+				var allCell = document.getElementsByClassName("mrg-control-item mrg-active");
+				for (var i = 0; i < allCell.length; i++) {
+					allCell[i].className = "mrg-control-item";
+				}
+			}
+
+			function hasClass(dom, className) {
+				className = className.replace(/^\s|\s$/g, "")
+				return (" " + ((dom || {}).className || "").replace(/\s/g, " ") + " "
+				).indexOf(" " + className + " ") >= 0
+			}
+
+			function showPop(index) {
+				var popover = $api.domAll('.mrg-popover');
+				clearPop();
+				$api.addCls(popover[index], 'mrg-active');
+				toggleOverview(true);
+			}
+
+			function clearPop() {
+				var oldPop = $api.dom('.mrg-popover.mrg-active');
+				if (oldPop) {
+					$api.removeCls(oldPop, "mrg-active");
+				}
+				toggleOverview(false);
+			}
+
+			function onClickPopButton(dom, itemindex) {
+				clearPop();
+				alert("你选择了第" + itemindex + "项：" + $api.text(dom));
+			}
+			
+			function toggleOverview(show)
+			{
+				var dom = $api.dom("#overview")
+				if(show)
+				{
+					dom.className = "mrg-popover-overview mrg-active";
+				}
+				else
+				{
+					dom.className = "mrg-popover-overview";
+				}
+			}
+
+			window.onload = function() {
+				var items = $api.domAll(".mrg-popover .aui-list-view-cell");
+				for (var i = 0; i < items.length; i++) {
+					var attr = document.createAttribute("onclick");
+					attr.nodeValue = "onClickPopButton(this," + i + ")";
+					items[i].attributes.setNamedItem(attr);
+				}
 			}
 			
 			apiready = function() {
-				var obj = api.require('UICustomPicker');
-				obj.open({
-					rect : {
-						x : 0,
-						y : 64,
-						w : 320,
-						h : 250
-					},
-					styles : {
-						bg : 'rgba(0,0,0,0)',
-						normalColor : '#959595',
-						selectedColor : '#3685dd',
-						selectedSize : 36,
-						tagColor : '#3685dd',
-						tagSize : 10
-					},
-					data : [{
-						tag : '时',
-						scope : '0-23'
-					}, {
-						tag : '分',
-						scope : '0-59'
-					}],
-					rows : 3,
-					fixed : true
-				}, function(ret, err) {
-					if (ret) {
-						alert(JSON.stringify(ret));
-					}
-				});
+				//$api.addEvt(el, name, fn);
 			}
 		</script>
 	</body>
